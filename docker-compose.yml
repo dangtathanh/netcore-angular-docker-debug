@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  angular-app:
+    image: hd/angularapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"      
+#    networks:
+#      - internal
+
+  angular-app-client:
+    image: hd/angularappclient
+    build:
+      context: ClientApp
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./ClientApp:/app
+#    networks:
+#      - internal
+
+networks:
+  internal:
+    external: false
